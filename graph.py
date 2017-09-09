@@ -24,6 +24,35 @@ def updateNode(node1, node2,  w):
 	g[node1].append((node2, w))
 
 
+#Return a list containing all the nodes
+#in the path from start to target if such
+#path exists. None otherwise
+#Generates b^d nodes in the worst case
+#Optimal: yes, Complete: yes
+def bfs(start, target):
+    visited = [start]
+    queue = [start]
+    path = [start]
+
+    while queue:
+        vertex = queue[0]
+        
+        queue.remove(queue[0])
+
+        for edge in range(len(g[vertex])):
+            if g[vertex][edge][0] == target:
+                path.append(g[vertex][edge][0])
+                return path
+            
+            if not g[vertex][edge][0] in visited:
+                visited.append(g[vertex][edge][0])
+                queue.append(g[vertex][edge][0])
+                path.append(g[vertex][edge][0])
+                
+
+    return None
+
+
 
 
 makeConnection('Miami', 'New York',250)
