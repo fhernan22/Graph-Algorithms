@@ -6,8 +6,6 @@ def makeConnection(node1, node2, w):
 	if not g.has_key(node1):
 		g[node1] = []
 
-	
-
 	if not g.has_key(node2):
 		g[node2] = []
 
@@ -53,19 +51,49 @@ def bfs(start, target):
     return None
 
 
+#Time complexity: O(b^m) where b is
+#the branching factor and m the maximum depth
+#of a node.
+#Space complexity: O(bm)
+def dfs(start, target):
+    visited = []
+    stack = [start]
 
+    while stack:
+    	vertex = stack.pop()
 
+    	if vertex not in visited:
+    		visited.append(vertex)
+	    	if vertex == target:
+	    		return visited
+
+		for i in range(len(g[vertex])):
+			if g[vertex][i][0] not in visited:
+				stack.append(g[vertex][i][0])
+
+    return None
+
+#Tests
 makeConnection('Miami', 'New York',250)
-makeConnection('Miami', 'New York', 20)
 makeConnection('Miami', 'Hialeah', 5)
 makeConnection('Hialeah', 'San Francisco', 200)
-makeConnection('Miami','LA', 400)
-makeConnection('Miami','LA', 42220)
-makeConnection('Miami','LA', 3)
+makeConnection('San Francisco','LA', 400)
 
 
+bfsList = bfs('Miami', 'New York')
+dfsList = dfs('Miami', 'New York')
+
+
+print "======================================================="
+print "======================================================="
+
+print bfsList
+print dfsList
+
+print "======================================================="
+print "======================================================="
 
 
 # Print all nodes and edgess
 for key, value in g.iteritems():
-	print key + ': ' + str(value)
+	print str(key) + ': ' + str(value)
