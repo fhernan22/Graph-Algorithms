@@ -30,7 +30,6 @@ def updateNode(node1, node2,  w):
 def bfs(start, target):
     visited = [start]
     queue = [start]
-    path = [start]
 
     while queue:
         vertex = queue[0]
@@ -39,13 +38,12 @@ def bfs(start, target):
 
         for edge in range(len(g[vertex])):
             if g[vertex][edge][0] == target:
-                path.append(g[vertex][edge][0])
-                return path
+            	visited.append(g[vertex][edge][0])
+                return visited
             
             if not g[vertex][edge][0] in visited:
                 visited.append(g[vertex][edge][0])
                 queue.append(g[vertex][edge][0])
-                path.append(g[vertex][edge][0])
                 
 
     return None
